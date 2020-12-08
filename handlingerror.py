@@ -18,11 +18,6 @@ tasks = [
     }
 ]
 
-@app.route('/', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
-
-
 @app.route('/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
     task = [task for task in tasks if task['id'] == task_id]
@@ -32,22 +27,7 @@ def get_task(task_id):
     
 @app.errorhandler(404)
 def error_handler(error):
-    return '''<!DOCTYPE html>
-<html>
-	<head>
-		<style>
-			body {background-color: blue;}
-			h1 {color: black;}
-			p {color: red;}
-		</style>
-	</head>
-	<body>
-
-		<h1>404 Error Abort </h1>
-		<p>Input is wrong</p>
-
-	</body>
-</html>'''
+    return '<h1>THIS IS AN ERROR IT HAPPEN WHEN PAGE NOT FOUND</h1><p>TIME TO RETURN BACK</p>'
     
 if __name__ == '__main__':
     app.run(debug=True)
