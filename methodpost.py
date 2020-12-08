@@ -18,15 +18,6 @@ tasks = [
         'done': False
     }
 ]
-
-@app.route('/', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
 @app.route('/', methods=['POST'])
 def create_task():
     if not request.json or not 'title' in request.json:
@@ -38,7 +29,7 @@ def create_task():
         'done': request.json.get('done')
     }
     tasks.append(task)
-    return jsonify({'task': task}), 201
+    return jsonify(tasks), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
