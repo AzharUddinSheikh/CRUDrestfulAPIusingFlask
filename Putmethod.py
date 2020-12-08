@@ -43,7 +43,7 @@ def update_task(task_id):
     task[0]['title'] = request.json.get('title', task[0]['title'])
     task[0]['description'] = request.json.get('description', task[0]['description'])
     task[0]['done'] = request.json.get('done', task[0]['done'])
-    return jsonify({'task': task[0]})
+    return jsonify(task)
 
 if __name__ == '__main__':
     app.run(debug=True)
