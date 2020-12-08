@@ -17,21 +17,13 @@ tasks = [
         'done': False
     }
 ]
-@app.route('/', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
-    
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
 @app.route('/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     task = [task for task in tasks if task['id'] == task_id]
     if len(task) == 0:
         abort(404)
     tasks.remove(task[0])
-    return jsonify({'result': True})
+    return jsonify({'result': True},tasks)
 
 if __name__ == '__main__':
     app.run(debug=True)
