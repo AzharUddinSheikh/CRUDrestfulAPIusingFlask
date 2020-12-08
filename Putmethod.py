@@ -18,15 +18,6 @@ tasks = [
         'done': False
     }
 ]
-
-@app.route('/', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
-    
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
 @app.route('/<int:task_id>', methods=['PUT'])
 def update_task(task_id):
     task = [task for task in tasks if task['id'] == task_id]
@@ -43,7 +34,7 @@ def update_task(task_id):
     task[0]['title'] = request.json.get('title', task[0]['title'])
     task[0]['description'] = request.json.get('description', task[0]['description'])
     task[0]['done'] = request.json.get('done', task[0]['done'])
-    return jsonify(task)
+    return jsonify(tasks)
 
 if __name__ == '__main__':
     app.run(debug=True)
